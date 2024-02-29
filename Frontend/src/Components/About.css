@@ -1,0 +1,16 @@
+.about{
+    margin: 2rem 4rem;
+}
+
+.about-text h1{
+    color: black;
+}
+.about-text h4{
+    color: rgb(93, 89, 89);
+}
+
+.aboutCards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

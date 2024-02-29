@@ -1,0 +1,30 @@
+.lawyerCard{
+    border:none;
+    border-radius: 1rem;
+    margin: 1rem;
+    width: 24rem;
+    height: 13rem;
+    min-width: 18rem;
+    background-color: aliceblue;
+    padding: 14px;
+    box-shadow: 0 10px 6px -6px #777;
+}
+
+p{
+    margin: 0;
+}
+h4{
+    margin: 0;
+}
+
+.head{
+    display: flex;
+}
+
+.talkBtn{
+    background-color: rgb(28, 114, 180);
+    width: 2.5rem;
+    height: 1.8rem;
+    padding: 2px 4px;
+    border-radius: 10px;
+}

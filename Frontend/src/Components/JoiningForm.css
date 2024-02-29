@@ -1,0 +1,12 @@
+.form{
+    margin: 0 4rem;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px 4px #d1cdcd;
+}
+
+.instruction{
+    text-decoration: underline;
+    margin: 4rem 0 0 4rem;
+
+}
