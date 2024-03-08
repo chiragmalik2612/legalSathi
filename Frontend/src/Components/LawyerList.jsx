@@ -8,7 +8,7 @@ const LawyerList = () => {
     const [lawyers, setLawyers] = useState([]);
 
     useEffect(() => {
-      axios.get('http://localhost:5555/lawyers')
+      axios.get('http://localhost:5000/lawyers')
       .then(lawyers => setLawyers(lawyers.data.allLawyers))
       .catch(err => console.log(err))
     }, [])

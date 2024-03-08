@@ -17,7 +17,7 @@ const JoiningForm = () =>{
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:5555/lawyers', {
+        axios.post('http://localhost:5000/lawyers', {
             lawyerName: name,
             password: password,
             email: email,
