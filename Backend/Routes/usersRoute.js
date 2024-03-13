@@ -1,10 +1,13 @@
 const express = require( "express");
 
-const {addUser, getUsers, getUser, deleteUser, updateUser} = require("../Controllers/userControllers.js");
+const {signupUser, loginUser, getUsers, getUser, deleteUser, updateUser} = require("../Controllers/userControllers.js");
 const router = express.Router();
 
-//Route for Save a new User
-router.post('/', addUser);
+//Route for SignUp a new User
+router.post('/', signupUser);
+
+//Route for login user
+router.post('/login', loginUser)
 
 //Route for Get all users from database
 router.get('/', getUsers);

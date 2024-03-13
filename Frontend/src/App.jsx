@@ -10,6 +10,7 @@ import Pricing from "./Components/Pricing";
 import Signup from "./Components/Signup";
 import Home from "./Components/Home";
 import JoiningForm from "./Components/JoiningForm";
+import LawyerAbout from "./Components/LawyerAbout";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route path="/home" element = {<Home/>}/>
       <Route path="/about" element = {<About/>}/>
       <Route path="/lawyers" element = {<LawyerList/>}/>
+      <Route path="/lawyers/:lname" element = {<LawyerAbout/>}/>
       <Route path="/pricing" element = {<Pricing/>}/>
       <Route path="/login" element = {<Login/>}/>
       <Route path="/signup" element = {<Signup/>}/>

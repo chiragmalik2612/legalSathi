@@ -1,11 +1,14 @@
 const express = require( "express");
-const { addLawyer, deleteLawyer, getLawyer, getLawyers, updateLawyer } = require( "../Controllers/lawyerControllers.js");
+const { signupLawyer, loginLawyer, deleteLawyer, getLawyer, getLawyers, updateLawyer } = require( "../Controllers/lawyerControllers.js");
 
 const router = express.Router();
 
 
-//Route for Save a new Lawyer
-router.post('/', addLawyer);
+//Signup lawyer
+router.post('/', signupLawyer);
+
+//Route for login lawyer
+router.post('/login', loginLawyer)
 
 //Route for Get all lawyers from database
 router.get('/', getLawyers);

@@ -1,29 +1,39 @@
 const User = require("../Models/userModel")
+const jwt = require('jsonwebtoken')
 
-//save user
-const addUser = async (request, response) =>{
+const generateToken = (_id) => {
+    return jwt.sign({_id}, process.env.SECRET_KEY, { expiresIn:'7d'})
+}
+
+//signup user
+const signupUser = async (request, response) =>{
+    const {userName, email, password} = request.body
     try{
-        if(
-            !request.body.userName ||
-            !request.body.email ||
-            !request.body.password
-        ){
-            return response.status(400).send({
-                message: 'Send all required fields',
-            });
-        }
-        const newUser = {
-            userName: request.body.userName,
-            email: request.body.email,
-            password: request.body.password
-        };
+        const user = await User.signup(userName, email, password);
 
-        const user = await User.create(newUser);
-
+        //creating Token
+        const token = generateToken(user._id)
+        
         return response.status(201).send(user);
+        
     } catch (error) {
         console.log(error.message);
         response.status(500).send({message: error.message});
+    }
+}
+
+//login User
+const loginUser = async (req,res) => {
+    const{email, password} = req.body
+
+    try{
+        const user = await User.login(email, password)
+
+        const token = generateToken(user._id)
+
+        res.status(200).json({email, token})
+    } catch (error){
+        res.status(400).json({error: error.message})
     }
 }
 
@@ -102,7 +112,8 @@ const deleteUser = async (request, response) => {
 }
 
 module.exports = {
-    addUser,
+    signupUser,
+    loginUser,
     getUsers,
     getUser,
     updateUser,

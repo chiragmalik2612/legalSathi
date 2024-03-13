@@ -1,36 +1,39 @@
 const Lawyer = require("../Models/lawyerModel")
+const jwt = require('jsonwebtoken')
 
-//Save a new Lawyer
-const addLawyer = async (request, response) =>{
+const generateToken = (_id) => {
+    return jwt.sign({_id}, process.env.SECRET_KEY, { expiresIn:'7d'})
+}
+
+//Signup lawyer
+const signupLawyer = async (request, response) =>{
+    const {lawyerName, email, password, experience, tags, state, city, number} = request.body
     try{
-        if(
-            !request.body.lawyerName ||
-            !request.body.email ||
-            !request.body.password ||
-            !request.body.state ||
-            !request.body.city ||
-            !request.body.number
-        ){
-            return response.status(400).send({
-                message: 'Send all required fields',
-            });
-        }
-        const newLawyer = {
-            lawyerName: request.body.lawyerName,
-            email: request.body.email,
-            password: request.body.password,
-            city: request.body.city,
-            state: request.body.state,
-            number: request.body.number,
-            experience: request.body.experience,
-        };
+        const lawyer = await Lawyer.signup(lawyerName, email, password, experience, tags, state, city, number)
 
-        const lawyer = await Lawyer.create(newLawyer);
-
+        //creating Token
+        const token = generateToken(lawyer._id)
+        console.log(token)
         return response.status(201).send(lawyer);
+
     } catch (error) {
         console.log(error.message);
         response.status(500).send({message: error.message});
+    }
+}
+
+//login lawyer
+const loginLawyer = async (req,res) => {
+    const{email, password} = req.body
+
+    try{
+        const lawyer = await Lawyer.login(email, password)
+
+        const token = generateToken(lawyer._id)
+
+        res.status(200).json({email, token})
+    } catch (error){
+        res.status(400).json({error: error.message})
     }
 }
 
@@ -112,7 +115,8 @@ const deleteLawyer = async (request, response) => {
 }
 
 module.exports = {
-    addLawyer,
+    signupLawyer,
+    loginLawyer,
     getLawyers,
     getLawyer,
     updateLawyer,

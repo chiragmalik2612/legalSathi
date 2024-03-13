@@ -1,6 +1,11 @@
+import { useState } from "react";
 import "./Login.css";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const[email, setEmail] = useState()
+  const[password, setPassword] = useState()
+  const navigate = useNavigate()
+  
     return (
         <form className="login">
     <img className="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"/>
